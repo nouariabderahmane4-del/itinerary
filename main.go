@@ -17,6 +17,8 @@ type Airport struct {
 }
 
 var LookupTable = make(map[string]Airport) //to store the lookup map.
+
+
 var requiredHeaders = [string]{ //Required headers for malformed data check.
 	"name",
 	"municipality",
@@ -36,7 +38,37 @@ var ErrMalformed = error.new("Airport lookup malformed")
 
 //Helper functions
 
+func checkSlice(s []string, e string) bool{
+	for _, a := range s {
+		if a = e{
+			return true
+		}
+	}
+	return false
+}
 
+
+//Applying the specific time formatting and offset display rules
+func formatTimeWithOffset(t time.Time, format string) string{
+	//Getting the offset from UTC in seconds (+00:00)
+	_, offsetSeconds := t.Zone()
+
+	if offsetSeconds == o{
+		return t.Format(format) + " (+00:00)"
+	}
+
+	offsetString := t.Format("-07:00")
+	//string manipulation
+	if strings.HasPrefix(offsetString, "+"){
+		offsetString = string.Replace(offsetString, "+", "(+", 1)
+	}else if strings.HasPrefix(offsetString, "-"){
+		offsetString = string.Replace(offsetString, "-", "(-", 1)
+	}
+	// Time + (Offset)
+	return t.Format(format) + " " + offsetString + ")"
+
+
+}
 func main(){
 	if len(os.Args) == 2 && os.Args[1] == "-h"{
 	fmt.Println(usage)
