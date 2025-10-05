@@ -1,9 +1,12 @@
 package main
 import (
-	os / fmt //command line arguments handling, file I/O, error output.
-	encoding / csv // Parsing the airport lookup CSV data.
-	regexp // Finding and replacing all patterns (airport codes, date/time strings, whitespaces).
-	time // Parsing and formatting ISO 8601 dates and times.
+	"os" //command line arguments handling, file I/O, error output.
+	"fmt" 
+	"encoding/csv" // Parsing the airport lookup CSV data.
+	"regexp" // Finding and replacing all patterns (airport codes, date/time strings, whitespaces).
+	"time" // Parsing and formatting ISO 8601 dates and times.
+	"errors"
+	"strings"
 )
 
 const usage = "itinerary usage:\ngo run . ./input.txt ./output.txt ./airport-lookup.csv"
@@ -20,7 +23,13 @@ var requiredHeaders = [string]{ //Required headers for malformed data check.
 	"icao_code",
 	"iata_code",
 }
+
+// Regex constants 
+
 var airportCodeRegex = regexp.MustCompile(`(\*?)(#|##)([A-Z]{3,4})`)// To match airport codes.
+var dateTimeRegex = regexp.MustCompile(`(D|T12|T24)\((.*?)\)`)// To match date/time patterns.
+var verticalWhitespaceRegex = regexp.MustCompile(`[\v\f\r]`) // For vertical whitespaces characters
+var excessiveNewLineRegex = regexp.MustCompile(`\n{3,}`) // For excessive newlines
 
 func main(){
 	if len(os.Args) == 2 && os.Args[1] == "-h"{
