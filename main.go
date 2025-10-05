@@ -13,33 +13,14 @@ type Airport struct {
 	City string
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+var LookupTable = make(map[string]Airport) //to store the lookup map.
+var requiredHeaders = [string]{ //Required headers for malformed data check.
+	"name",
+	"municipality",
+	"icao_code",
+	"iata_code",
+}
+var airportCodeRegex = regexp.MustCompile(`(\*?)(#|##)([A-Z]{3,4})`)// To match airport codes.
 
 func main(){
 	if len(os.Args) == 2 && os.Args[1] == "-h"{
