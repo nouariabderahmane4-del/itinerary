@@ -31,6 +31,12 @@ var dateTimeRegex = regexp.MustCompile(`(D|T12|T24)\((.*?)\)`)// To match date/t
 var verticalWhitespaceRegex = regexp.MustCompile(`[\v\f\r]`) // For vertical whitespaces characters
 var excessiveNewLineRegex = regexp.MustCompile(`\n{3,}`) // For excessive newlines
 
+// Error definition (I use os.Exit(0) )
+var ErrMalformed = error.new("Airport lookup malformed")
+
+//Helper functions
+
+
 func main(){
 	if len(os.Args) == 2 && os.Args[1] == "-h"{
 	fmt.Println(usage)
