@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"bufio"
 )
 
 func main() {
@@ -18,14 +19,23 @@ func main() {
 
 	file, err := os.Open("input.txt")
 		if err != nil {
-			fmt.Println("Error opening file:", err)
+			fmt.Println(err)
 			return
 		}
 	fmt.Println("file opened")
 	defer file.Close()
-	scanner := bufio.NewScanner(file)
 
-	
+scanner := bufio.NewScanner(file)
+
+	for scanner.Scan() {
+		Content := scanner.Text()
+		fmt.Println(Content)
+	}
+	if err := scanner.Err(); err != nil {
+		fmt.Println(err)
+	}
+
+
 
 
 }
