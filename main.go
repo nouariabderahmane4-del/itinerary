@@ -6,9 +6,10 @@ import (
 )
 
 func main() {
-	asking_for_help := os.Args[1]
-	if asking_for_help == "-h" {
+	if len(os.Args)==2 && os.Args[1] == "-h" {
 		fmt.Println("itinerary usage:\ngo run . ./input.txt ./output.txt ./airport-lookup.csv")
+	}else if len(os.Args) != 4 {
+		fmt.Println("Wrong number of arguments. Use -h for help")
 	}
 
 }
