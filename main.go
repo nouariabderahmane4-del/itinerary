@@ -15,7 +15,17 @@ func main() {
 		fmt.Println("one or more arguments are wrong. Use -h for help")
 		os.Exit(0)
 	}
-	fmt.Println("Proceeding with the program")
+
+	file, err := os.Open("input.txt")
+		if err != nil {
+			fmt.Println("Error opening file:", err)
+			return
+		}
+	fmt.Println("file opened")
+	defer file.Close()
+	scanner := bufio.NewScanner(file)
+
+	
 
 
 }
