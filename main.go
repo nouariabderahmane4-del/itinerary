@@ -8,35 +8,35 @@ import (
 )
 
 func main() {
+
+
 	if len(os.Args)==2 && os.Args[1] == "-h" {
 		fmt.Println("itinerary usage:\ngo run . ./input.txt ./output.txt ./airport-lookup.csv")
 	}else if len(os.Args) != 4 {
 		fmt.Println("Wrong number of arguments. Use -h for help")
-		os.Exit(0)
-	}else if os.Args[1] != "./input.txt" || os.Args[2] != "./output.txt" || os.Args[3] != "./airport_lookup.csv"{
-		fmt.Println("one or more arguments are wrong. Use -h for help")
-		os.Exit(0)
+		os.Exit(1)
 	}
 
-	file, err := os.Open("input.txt")
+	inputFile := os.Args[1]
+
+	file, err := os.Open(inputFile)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
-	fmt.Println("file opened")
 	defer file.Close()
 
-scanner := bufio.NewScanner(file)
+	scanner := bufio.NewScanner(file)
 
 	for scanner.Scan() {
-		Content := scanner.Text()
-		fmt.Println(Content)
+		line := strings.TrimSpace(scanner.Text())
+
+	if strings.Contains(line, "#"){
+		fmt.Println("City name code was found:", line)
 	}
-	if err := scanner.Err(); err != nil {
+}
+if err := scanner.Err(); err != nil {
 		fmt.Println(err)
 	}
-
-
-
 
 }
