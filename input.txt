@@ -1,16 +1,16 @@
 Trip : Buisness
 Departure: D(2025-10-15T06:30:00-04:00)
-From: #JFK
+From: *#JFK
 
-Arrival: D(2025-10-15T09:15:00-07:00)
+Arrival: T12(2025-10-15T09:15:00-07:00)
 To: #LAX
 
 --- CONNECTION---
 
 Departure: D(2025-10-17T14:00:00-07:00)
-From: #LAX
+From: ##LAX
 
-Arrival: D(2025-10-17T22:30:00+01:00)
+Arrival: T24(2025-10-17T22:30:00+01:00)
 To: #LHR
 
 Notes:

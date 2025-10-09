@@ -31,8 +31,22 @@ func main() {
 	for scanner.Scan() {
 		line := strings.TrimSpace(scanner.Text())
 
-	if strings.Contains(line, "#"){
+	if strings.Contains(line, "*#"){
 		fmt.Println("City name code was found:", line)
+	}else if strings.Contains(line, "##"){
+		fmt.Println("ICAO code was found:", line)
+	}else if strings.Contains(line, "#"){
+		fmt.Println("IATA code was found:", line)
+	}
+	
+	if strings.Contains(line, "D("){
+		fmt.Println("Date pattern was found:", line)
+	}
+	if strings.Contains(line, "T12("){
+		fmt.Println("T12 hours time was found:", line)
+	}
+	if strings.Contains(line, "T24("){
+		fmt.Println("T24 hours time was found:", line)
 	}
 }
 if err := scanner.Err(); err != nil {
