@@ -39,4 +39,11 @@ func GetCsv(csv_file string) []Airport {
 		fmt.Print("Airport lookup not found", err)
 		os.Exit(1)
 	}
+	defer lookup.Close()
+
+	reader := csv.NewReader(lookup)
+	header, err := reader.Read()
+	if err != nil {
+		return nil
+	}
 }
