@@ -33,3 +33,11 @@ func GetText(input_file string)string{
 	}
 	return string(file_content)
 }
+func GetCsv(csv_file string) []Airport {
+	lookup, err := os.Open(csv_file)
+	if err != nil {
+		fmt.Print("Airport lookup not found", err)
+		os.Exit(1)
+	}
+	defer lookup.Close()
+}
