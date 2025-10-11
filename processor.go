@@ -8,6 +8,8 @@ import (
 	"regexp"
 	"strings"
 	"time"
+
+	input "main.go"
 )
 
 func TrimSpace(text string) string{
@@ -18,6 +20,23 @@ func TrimSpace(text string) string{
 	return text
 }
 
+func ConvertATAcodes(match string, csvData []input.Airport) string {
+	for _, airport := range csvData {
+		if airport.Iata_code == match[1:]{
+			return airport.Name
+		}
+	} 
+	return match
+}
+func ConvertICAOcodes(match string, csvData []input.Airport) string {
+	for _, airport := range csvData {
+		if airport.Icao_code == match[1:] {
+			return airport.Name
+		}
+	}
+	return match
+}
+func replaceMunicipality(match string, csvData )
 func Input_analyzing(inputData string, csvData []input.Airport) (string, string) {
 
 	colorToTerminal := inputData
@@ -29,7 +48,7 @@ func Input_analyzing(inputData string, csvData []input.Airport) (string, string)
 
 	matchCity := reg_city.FindAllAtring(inputData, -1)
 	for _, match := range matchCity{
-		cityName := replace_Municipality(match, csvData)
+		cityName := replaceMunicipality(match, csvData)
 		input_data = strings.ReplaceAll(inputData, match, cityName)
 		colorToTerminal = strings.ReplaceAll(colorToTerminal, match, "\033[36m"+cityName+"\033[0m")
 	}
