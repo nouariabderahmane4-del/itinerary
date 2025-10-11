@@ -46,4 +46,49 @@ func GetCsv(csv_file string) []Airport {
 	if err != nil {
 		return nil
 	}
+	airport_data:= []Airport {}
+	lineNumber := 1
+
+	columnPositions := make(map[string]int)
+	if len(header) < 6 {
+		fmt.Println("Airport lookup malformed (Missing column)")
+		os.Exit(0)
+	}
+
+	for i, column := range header {
+		if column == "" {
+			fmt.Println("Airport lookup malformed (Empty column)")
+			os.Exit(0)
+		}
+		columnPositions[column] = i
+	}
+
+	for {
+		line, err := reader.Read() {
+			if err == io.EO {
+				break
+			}
+		}
+		if err != nil {
+			fmt.Println("Airport lookup malformed", err)
+			os.Exit(0)
+		}
+	for _, field := range line {
+		if strings.trimspace(field) == "" {
+			fmt.Printf("Airport lookup malformed (Empty field on line %d)\n", lineNumber)
+			os.Exit(0)
+		}
+	}
+	lineNumber++
+	airport := Airport{
+		Name:			line[columnPositions["name"]],
+		Iso_country:	line[columnPositions["iso_country"]],
+		Municipality:	line[columnPositions["municipality"]],
+		Icao_code:		line[columnPositions["icao_code"]],
+		Iata_code:		line[columnPositions["iata_code"]],
+		Coordinates:	line[columnPositions["coordinates"]],
+	}
+	airport_data = append(airport_data, airport)
+}
+return airport_data
 }
