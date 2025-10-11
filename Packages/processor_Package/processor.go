@@ -62,9 +62,9 @@ func ConvertTime(match string, inputData string) string{
 	case  "D":
 		formattedTime = parsedTime.Format("02 Jan 2006")
 	case "T12":
-		formattedTime = parsedTime.Format("03:04PM (Z07:00)")
+		formattedTime = parsedTime.Format("03:04PM (-07:00)")
 	case "T24":
-		formattedTime = parsedTime.Format("15:04 (Z07:00)") 
+		formattedTime = parsedTime.Format("15:04 (-07:00)") 
 	}
 	return formattedTime
 }
@@ -108,7 +108,6 @@ func Input_analyzing(inputData string, csvData []input.Airport) (string, string)
 	return TrimSpace(inputData), TrimSpace(colorToTerminal)
 }
 func Final_Output(output_database string, output_file string, coloured_output string) {
-
 	good_bye := "\nThank you for using Anywhere Holidays Prettifier Tool ✈️\n\nSee you soon! ✈️\n\n"
 	output_done := fmt.Sprintf("\n-= Output successfully written to -> %s ✈️ =-\n\nDo you want to print the result in the command line? (Y/N) ✈️\n", output_file)
 
@@ -157,7 +156,7 @@ func Final_Output(output_database string, output_file string, coloured_output st
 		fmt.Print(string(letter))
 	}
 
-	// --- ASCII airplane animation ---
+	// --- Simplified ASCII airplane animation ---
 	plane := []string{
 		"            ______            ",
 		"            _\\ _~ -\\___      ",
@@ -169,17 +168,20 @@ func Final_Output(output_database string, output_file string, coloured_output st
 		"                      =  ===(_________D",
 	}
 
-	width := 50   // distance to fly across the terminal
-	fmt.Println() // start on a new line for the plane
+	moves := 10      // number of steps the plane moves before stopping
+	height := len(plane)
 
-	for i := 0; i < width; i++ {
-		// Move cursor up to overwrite previous plane
-		fmt.Print("\033[8A") // 8 lines tall
-		for _, line := range plane {
-			fmt.Print("\r" + strings.Repeat(" ", i) + line + "\n")
+	fmt.Println() // start on a new line
+
+	for i := 0; i <= moves; i++ {
+		if i > 0 {
+			// Move cursor up to overwrite previous plane
+			fmt.Print(fmt.Sprintf("\033[%dA", height))
 		}
-		time.Sleep(120 * time.Millisecond) // control speed
+		for _, line := range plane {
+			fmt.Print("\r" + strings.Repeat(" ", i*2) + line + "\n") // *2 for faster horizontal movement
+		}
+		time.Sleep(120 * time.Millisecond)
 	}
-
-	fmt.Println() // clean line after animation
 }
+

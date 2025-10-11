@@ -39,7 +39,7 @@ func Read_txt(input_file string)string{
 	//try to read the whole file.
 	file_content, err := os.ReadFile(input_file)
 	if err != nil {
-		fmt.Println("Input file not found ", err)
+		fmt.Println("Input file not found\n ", err)
 		os.Exit(0)
 	}
 	//Return the content as a string.
@@ -52,7 +52,8 @@ func Read_csv(csv_file string) []Airport {
 	//Try to open CSV file
 	lookup, err := os.Open(csv_file)
 	if err != nil {
-		fmt.Print("Airport lookup not found", err)
+		fmt.Print("Airport lookup not found,\n", err,)
+		fmt.Println()
 		os.Exit(1)
 	}
 	defer lookup.Close()
@@ -97,7 +98,7 @@ func Read_csv(csv_file string) []Airport {
 	//Checking if any field in this line is empty
 	for _, field := range line {
 		if strings.TrimSpace(field) == "" {
-			fmt.Printf("Airport lookup malformed (Empty field on line %d)\n", lineNumber)
+			fmt.Printf("Airport lookup malformed (Empty field on line %d)\n", lineNumber+1)
 			os.Exit(0)
 		}
 	}
