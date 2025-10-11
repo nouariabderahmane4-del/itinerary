@@ -21,7 +21,7 @@ type Airport struct {
 
 //Check_args is where we make sure that the user gave us the right number of arguments.
 //If they didn't or if they ask for help with "-h", we print how to use the programme and exit.
-func TestArgs(args []string)(string, string, string){
+func Check_args(args []string)(string, string, string){
 
 	//Check if the user gave too few or too many arguments, or asked for help.
 	if len(args) != 4 || len(args) == 2 && args[1] == "-h"{
@@ -112,7 +112,7 @@ func Read_csv(csv_file string) []Airport {
 		Iata_code:		line[columnPositions["iata_code"]],
 		Coordinates:	line[columnPositions["coordinates"]],
 	}
-	
+
 	//Add this airport to our list
 	airport_data = append(airport_data, airport)
 	}

@@ -1,23 +1,13 @@
-Trip : Buisness
-Departure: D(2025-10-15T06:30:00-04:00)
-From: *#JFK
+Your flight departs from Palma, and your destination is Karlsruhe/Baden-Baden.
+Departure is scheduled at T12(2069-04-24T19:18-02:00) on D(2022-05-09T08:07Z)
+Flight Itinerary
 
-Arrival: T12(2025-10-15T09:15:00-07:00)
-To: #LAX
+Palma to Karlsruhe/Baden-Baden on D(2023-07-15T09:00-07:00)
+Departure: T12(2023-07-15T09:00-07:00)
+Arrival: T24(2023-07-16T12:00Z)
 
---- CONNECTION---
+Eindhoven to Coventry on D(2023-07-15T09:00-07:00)
+Departure: T12(2023-07-15T09:00-07:00)
+Arrival: T24(2023-07-16T12:00Z)
 
-Departure: D(2025-10-17T14:00:00-07:00)
-From: ##LAX
-
-Arrival: T24(2025-10-17T22:30:00+01:00)
-To: #LHR
-
-Notes:
-
-
-Meeting in LA before connecting to london.
-
-hotel check-in: D(2025-10-15T15:00:00-07:00)
-
-return flight TBD
+D(2022-05-09T08:07Z)

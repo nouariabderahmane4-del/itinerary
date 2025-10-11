@@ -3,13 +3,12 @@ package processor
 import (
 	"bufio"
 	"fmt"
-	"input"
+	"itinerary/Packages/input_Package"
 	"os"
 	"regexp"
 	"strings"
 	"time"
 
-	input "main.go"
 )
 
 func TrimSpace(text string) string{
@@ -79,34 +78,34 @@ func Input_analyzing(inputData string, csvData []input.Airport) (string, string)
 	reg_icao := regexp.MustCompile(`\##[A-Z]{4}\b`)
 	reg_time := regexp.MustCompile(`(D|T12|T24)(\([^)]+\))`)
 
-	matchCity := reg_city.FindAllAtring(inputData, -1)
+	matchCity := reg_city.FindAllString(inputData, -1)
 	for _, match := range matchCity{
 		cityName := replaceMunicipality(match, csvData)
-		input_data = strings.ReplaceAll(inputData, match, cityName)
+		inputData = strings.ReplaceAll(inputData, match, cityName)
 		colorToTerminal = strings.ReplaceAll(colorToTerminal, match, "\033[36m"+cityName+"\033[0m")
 	}
 
-	matchIata := reg_iata.FindAllAtring(inputData, -1)
+	matchIata := reg_iata.FindAllString(inputData, -1)
 	for _, match := range matchIata {
 		airportName := ConvertATAcodes(match, csvData)
 		inputData = strings.ReplaceAll(inputData, match, airportName)
-		colorToTerminal = strings.ReplaceAll(colorToTerminal, match, "\033[36m"+cityName+"\033[0m")
+		colorToTerminal = strings.ReplaceAll(colorToTerminal, match, "\033[36m"+airportName+"\033[0m")
 	}
 
-	matchIcao := reg_icao.FindAllAtring(inputData, -1)
+	matchIcao := reg_icao.FindAllString(inputData, -1)
 	for _, match := range matchIcao {
 		airportName := ConvertICAOcodes(match, csvData)
 		inputData = strings.ReplaceAll(inputData, match, airportName)
-		colorToTerminal = strings.ReplaceAll(colorToTerminal, match, "\033[36m"+cityName+"\033[0m")
+		colorToTerminal = strings.ReplaceAll(colorToTerminal, match, "\033[36m"+airportName+"\033[0m")
 	}
 
-	matchTime := reg_time.FindAllAtring(inputData, -1)
+	matchTime := reg_time.FindAllString(inputData, -1)
 	for _, match := range matchTime {
 		EnteredTime := ConvertTime(match, inputData)
 		inputData = strings.ReplaceAll(inputData, match, EnteredTime)
-		colorToTerminal = strings.ReplaceAll(colorToTerminal, match, "\033[91m"+cityName+"\033[0m")
+		colorToTerminal = strings.ReplaceAll(colorToTerminal, match, "\033[91m"+EnteredTime+"\033[0m")
 	}
-	return trim_spaces(inputData), trim_spaces(colorToTerminal)
+	return TrimSpace(inputData), TrimSpace(colorToTerminal)
 }
 func Final_Output(output_database string, output_file string, coloured_output string) {
 
