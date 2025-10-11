@@ -36,7 +36,14 @@ func ConvertICAOcodes(match string, csvData []input.Airport) string {
 	}
 	return match
 }
-func replaceMunicipality(match string, csvData )
+func replaceMunicipality(match string, csvData  []input.Airport) string {
+	for _, airport := range csvData{
+		if strings.TrimPrefix(match, "*##") == airport.Icao_code || strings.TrimPrefix(match, "*#") == airport.Iata_code{
+			return airport.Municipality
+		}
+	}
+	return match
+}
 func Input_analyzing(inputData string, csvData []input.Airport) (string, string) {
 
 	colorToTerminal := inputData
