@@ -205,7 +205,7 @@ func Final_Output(output_database string, output_file string, coloured_output st
 	for i := 0; i <= moves; i++ {
 		if i > 0 {
 			// Move cursor up to overwrite previous plane
-			fmt.Print(fmt.Sprintf("\033[%dA", height))
+			fmt.Printf(fmt.Sprintf("\033[%dA", height))
 		}
 		for _, line := range plane {
 			fmt.Print("\r" + strings.Repeat(" ", i*2) + line + "\n")
