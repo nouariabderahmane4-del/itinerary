@@ -39,7 +39,7 @@ func Read_txt(input_file string)string{
 	//try to read the whole file.
 	file_content, err := os.ReadFile(input_file)
 	if err != nil {
-		fmt.Println("\nInput file not found\n")
+		fmt.Println("\nInput not found\n")
 		os.Exit(0)
 	}
 	//Return the content as a string.
