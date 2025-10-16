@@ -65,7 +65,6 @@ func ConvertTime(match string, inputData string) string {
 	const ISO_Layout = "2006-01-02T15:04Z07:00"
 	parsedTime, err := time.Parse(ISO_Layout, timeWithoutParentheses)
 	if err != nil {
-		fmt.Println("Error parsing time:", err)
 		return match
 	}
 
@@ -138,7 +137,11 @@ func Input_analyzing(inputData string, csvData []input.Airport) (string, string)
 // - ASCII airplane animation
 func Final_Output(output_database string, output_file string, coloured_output string) {
 	good_bye := "\nThank you for using Anywhere Holidays Prettifier Tool ✈️\n\nSee you soon! ✈️\n\n"
-	output_done := fmt.Sprintf("\n-= Output successfully written to -> %s ✈️ =-\n\nDo you want to print the result in the command line? (Y/N) ✈️\n", output_file)
+		output_done := "\033[1;32m" +
+		`+--------------------------------------------+
+|  ✈️  Output successfully written to file!   |
++--------------------------------------------+
+` + "\033[0m\nDo you want to print the result in the terminal? (Y/N)\n"
 
 	// Write output to file
 	err := os.WriteFile(output_file, []byte(output_database), 0644)

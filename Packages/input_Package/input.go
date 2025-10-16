@@ -39,7 +39,7 @@ func Read_txt(input_file string)string{
 	//try to read the whole file.
 	file_content, err := os.ReadFile(input_file)
 	if err != nil {
-		fmt.Println("Input file not found\n ", err)
+		fmt.Println("\nInput file not found\n")
 		os.Exit(0)
 	}
 	//Return the content as a string.
@@ -52,9 +52,8 @@ func Read_csv(csv_file string) []Airport {
 	//Try to open CSV file
 	lookup, err := os.Open(csv_file)
 	if err != nil {
-		fmt.Print("Airport lookup not found,\n", err,)
-		fmt.Println()
-		os.Exit(1)
+		fmt.Print("\nAirport lookup not found\n")
+		os.Exit(0)
 	}
 	defer lookup.Close()
 	
@@ -72,14 +71,14 @@ func Read_csv(csv_file string) []Airport {
 	
 	//Does CSv has 6 columns?
 	if len(header) < 6 {
-		fmt.Println("Airport lookup malformed (Missing column)")
+		fmt.Println("\nAirport lookup malformed\n")
 		os.Exit(0)
 	}
 
 	//Going through the header and mapping each column to its index
 	for i, column := range header {
 		if column == "" {
-			fmt.Println("Airport lookup malformed (Empty column)")
+			fmt.Println("\nAirport lookup malformed\n")
 			os.Exit(0)
 		}
 		columnPositions[column] = i
@@ -92,13 +91,13 @@ func Read_csv(csv_file string) []Airport {
 				break // End of the file
 			}
 		if err != nil {
-			fmt.Println("Airport lookup malformed", err)
+			fmt.Println("\nAirport lookup malformed\n")
 			os.Exit(0)
 		}
 	//Checking if any field in this line is empty
 	for _, field := range line {
 		if strings.TrimSpace(field) == "" {
-			fmt.Printf("Airport lookup malformed (Empty field on line %d)\n", lineNumber+1)
+			fmt.Printf("\nAirport lookup malformed\n")
 			os.Exit(0)
 		}
 	}
